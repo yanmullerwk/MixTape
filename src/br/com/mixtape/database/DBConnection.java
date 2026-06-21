@@ -59,30 +59,36 @@ public class DBConnection {
 
             // Usuarios
             stmt.executeUpdate("""
-                CREATE TABLE IF NOT EXISTS usuarios (
+                CREATE TABLE IF NOT EXISTS users (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     nome VARCHAR(100) NOT NULL,
                     email VARCHAR(150) NOT NULL UNIQUE,
-                    senha VARCHAR(255) NOT NULL
+                    senha VARCHAR(255) NOT NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
                 ) ENGINE=InnoDB
             """);
 
             // Artistas
             stmt.executeUpdate("""
-                CREATE TABLE IF NOT EXISTS artistas (
+                CREATE TABLE IF NOT EXISTS artists (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     nome VARCHAR(100) NOT NULL,
-                    genero_musical VARCHAR(80) NOT NULL
+                    genero_musical VARCHAR(80) NOT NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
                 ) ENGINE=InnoDB
             """);
 
             // Musicas
             stmt.executeUpdate("""
-                CREATE TABLE IF NOT EXISTS musicas (
+                CREATE TABLE IF NOT EXISTS musics (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     titulo VARCHAR(150) NOT NULL,
                     duracao_segundos INT NOT NULL DEFAULT 0,
                     link_reproducao VARCHAR(500) NOT NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                     artista_id INT,
                     CONSTRAINT fk_musica_artista
                         FOREIGN KEY (artista_id)
@@ -98,6 +104,8 @@ public class DBConnection {
                     nome VARCHAR(150) NOT NULL,
                     descricao TEXT,
                     usuario_id INT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                     CONSTRAINT fk_playlist_usuario
                         FOREIGN KEY (usuario_id)
                         REFERENCES usuarios(id)
@@ -107,7 +115,7 @@ public class DBConnection {
 
             // Relação Playlist x Música
             stmt.executeUpdate("""
-                CREATE TABLE IF NOT EXISTS playlist_musica (
+                CREATE TABLE IF NOT EXISTS playlist_music (
                     playlist_id INT NOT NULL,
                     musica_id INT NOT NULL,
                     PRIMARY KEY (playlist_id, musica_id),
