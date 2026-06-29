@@ -1,6 +1,6 @@
 package br.com.mixtape.model;
 
-public class User extends Entity{
+public class User extends Entity {
 
     private String name;
     private String email;
@@ -32,6 +32,6 @@ public class User extends Entity{
 
     @Override
     public String toString() {
-        return String.format("[ID: %d] %s <%s>", getId(), name, email);
+        return String.format("id:%d nome:%s email:%s", getId(), name, email);
     }
 }

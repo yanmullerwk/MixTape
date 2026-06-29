@@ -1,6 +1,6 @@
 package br.com.mixtape.model;
 
-public class Artist extends Entity{
+public class Artist extends Entity {
 
     private String name;
     private String musicalGenre;
@@ -19,13 +19,13 @@ public class Artist extends Entity{
     }
 
     public String getName() { return name; }
-    public void setname(String name) { this.name = name; }
+    public void setName(String name) { this.name = name; }
 
     public String getMusicalGenre() { return musicalGenre; }
     public void setMusicalGenre(String musicalGenre) { this.musicalGenre = musicalGenre; }
 
     @Override
     public String toString() {
-        return String.format("[ID: %d] %s — Gênero: %s", getId(), name, musicalGenre);
+        return String.format("[id: %d - nome: %s - Genero Musical: %s", getId(), name, musicalGenre);
     }
 }

@@ -3,30 +3,30 @@ package br.com.mixtape.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Playlist extends Entity{
+public class Playlist extends Entity {
 
     private String name;
     private String description;
-    private User user;
-    private List<Music> musics;
+    private User owner;
+    private List<Song> songs;
 
     public Playlist() {
-        this.musics = new ArrayList<>();
+        this.songs = new ArrayList<>();
     }
 
-    public Playlist(String name, String description, User user) {
+    public Playlist(String name, String description, User owner) {
         this.name = name;
         this.description = description;
-        this.user = user;
-        this.musics = new ArrayList<>();
+        this.owner = owner;
+        this.songs = new ArrayList<>();
     }
 
-    public Playlist(int id, String name, String description, User user) {
+    public Playlist(int id, String name, String description, User owner) {
         super(id);
         this.name = name;
         this.description = description;
-        this.user = user;
-        this.musics = new ArrayList<>();
+        this.owner = owner;
+        this.songs = new ArrayList<>();
     }
 
     public String getName() { return name; }
@@ -35,26 +35,26 @@ public class Playlist extends Entity{
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
+    public User getOwner() { return owner; }
+    public void setOwner(User owner) { this.owner = owner; }
 
-    public List<Music> getMusics() { return musics; }
-    public void setMusics(List<Music> musics) { this.musics = musics; }
+    public List<Song> getSongs() { return songs; }
+    public void setSongs(List<Song> songs) { this.songs = songs; }
 
-    public void addMusic(Music music) {
-        if (!musics.contains(music)) {
-            musics.add(music);
+    public void addSong(Song song) {
+        if (!songs.contains(song)) {
+            songs.add(song);
         }
     }
 
-    public void removeMusic(Music musica) {
-        musics.remove(musica);
+    public void removeSong(Song song) {
+        songs.remove(song);
     }
 
     @Override
     public String toString() {
-        String nameUser = (user != null) ? user.getName() : "Desconhecido";
-        return String.format("[ID: %d] %s — %s | Dono: %s | Músicas: %d",
-                getId(), name, description, nameUser, musics.size());
+        String ownerName = (owner != null) ? owner.getName() : "Unknown";
+        return String.format("ID: %d %s — %s | Dono: %s | Musicas: %d",
+                getId(), name, description, ownerName, songs.size());
     }
 }
